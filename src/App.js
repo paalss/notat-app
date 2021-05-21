@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import NotesContent from "./components/NotesContent/NoteContent";
+import NotesContent from "./components/NoteBody/NoteBody";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {

@@ -1,6 +1,6 @@
-import classes from "./NoteContent.module.css";
+import classes from "./NoteBody.module.css";
 
-const NotesContent = (props) => {
+const NoteBody = (props) => {
   let body
   if (props.body !== null) {
     console.log(props.body[0]);
@@ -15,4 +15,4 @@ const NotesContent = (props) => {
   }
   return <div className={classes.root}>{body}</div>;
 };
-export default NotesContent;
+export default NoteBody;
