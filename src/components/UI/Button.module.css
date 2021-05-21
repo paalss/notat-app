@@ -1,0 +1,23 @@
+.button {
+  width: 100%;
+  height: 50px;
+  border: none;
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: #000;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: #353535;
+}
+
+/*
+.button .gray {
+  background-color: #575757;
+}
+
+.button .gray:hover {
+  background-color: #353535;
+}
+*/

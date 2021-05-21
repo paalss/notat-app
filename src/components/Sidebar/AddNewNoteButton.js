@@ -1,4 +1,4 @@
-import classes from "./AddNewNoteButton.module.css";
+import Button from "../UI/Button";
 
 const AddNewNoteButton = () => {
   const addNew = () => {
@@ -17,9 +17,9 @@ const AddNewNoteButton = () => {
     );
   };
   return (
-    <button className={classes.button} onClick={addNew}>
+    <Button onClick={addNew}>
       + Add new note
-    </button>
+    </Button>
   );
 };
 export default AddNewNoteButton;

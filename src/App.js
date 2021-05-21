@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import NotesContent from "./components/NotesContent/NoteContent";
-import NotesList from "./components/NotesList/NotesList";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {
   const [notes, setNotes] = useState([]);
+  // console.log('notes: ', notes)
   
-  const fetchNotes = async() => {
+  const fetchNotes = useCallback(async() => {
     const response = await fetch(
-      "https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
+      "https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes.json"
     );
 
     if (!response.ok) {
@@ -21,18 +22,21 @@ function App() {
     for (const key in data) {
       loadedNotes.push({
         id: key,
-        name: data[key].name,
-        price: data[key].price,
-        description: data[key].description,
+        title: data[key].title,
+        content: data[key].content,
       });
     }
 
     setNotes(loadedNotes);
-  };
+  }, []);
+
+  useEffect(()=>{
+    fetchNotes()
+  }, [fetchNotes])
 
   return (
     <div className="App">
-      <NotesList />
+      <Sidebar list={notes} />
       <NotesContent />
     </div>
   );
