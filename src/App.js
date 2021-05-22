@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 function App() {
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
+  console.log('notes: ', notes)
 
   const fetchHttp = async () => {
     const response = await fetch(
@@ -38,7 +39,7 @@ function App() {
 
   const selectNoteHandler = async (selectedNoteId) => {
     const data = await fetchHttp();
-
+    // console.log('data: ', await data)
     const loadedNote = [];
     for (const key in await data) {
       if (selectedNoteId === key) {
@@ -49,17 +50,41 @@ function App() {
         });
       }
     }
-
     setSelectedNote(loadedNote);
   };
 
-  const changeNoteHandler=(value)=>{
-    setSelectedNote(value)
-  }
-  
+  const addNoteHandler = async () => {
+    const data = await fetch(
+      "https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          title: "",
+          content: "",
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(data)
+    console.log('hvorfor er ikke "data" ^^ en firebase ID???')
+    setNotes((prevNotes) => {
+      return [...prevNotes, {id: data, title: "", content: ""}];
+    });
+  };
+
+  const changeNoteHandler = (value) => {
+    setSelectedNote(value);
+  };
+
   return (
     <div className="App">
-      <Sidebar onSelectNote={selectNoteHandler} list={notes} />
+      <Sidebar
+        onAddNote={addNoteHandler}
+        onSelectNote={selectNoteHandler}
+        list={notes}
+      />
       <NoteBody body={selectedNote} onChangeNote={changeNoteHandler} />
     </div>
   );

@@ -52,7 +52,7 @@ const NoteBody = (props) => {
       </>
     );
   } else {
-    body = <p>No note selected</p>;
+    body = <p></p>;
   }
   return <div className={classes.root}>{body}</div>;
 };
