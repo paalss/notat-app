@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import NotesBody from "./components/NoteBody/NoteBody";
+import NoteBody from "./components/NoteBody/NoteBody";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
 
-  const fetchHttp =async ()=>{
+  const fetchHttp = async () => {
     const response = await fetch(
       "https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes.json"
     );
@@ -15,10 +15,10 @@ function App() {
       throw new Error("Something went wrong!");
     }
     return await response.json();
-  }
+  };
 
   const fetchNotes = useCallback(async () => {
-    const data = await fetchHttp()
+    const data = await fetchHttp();
 
     const loadedNotes = [];
     for (const key in data) {
@@ -37,25 +37,29 @@ function App() {
   }, [fetchNotes]);
 
   const selectNoteHandler = async (selectedNoteId) => {
-    const data = await fetchHttp()
+    const data = await fetchHttp();
 
-    const loadedNote = []
+    const loadedNote = [];
     for (const key in await data) {
-      if (selectedNoteId===key) {
+      if (selectedNoteId === key) {
         loadedNote.push({
           title: data[key].title,
-          content: data[key].content
-        })
+          content: data[key].content,
+        });
       }
     }
 
-    setSelectedNote(loadedNote)
+    setSelectedNote(loadedNote);
   };
 
+  const changeNoteHandler=(value)=>{
+    setSelectedNote(value)
+  }
+  
   return (
     <div className="App">
       <Sidebar onSelectNote={selectNoteHandler} list={notes} />
-      <NotesBody body={selectedNote} />
+      <NoteBody body={selectedNote} onChangeNote={changeNoteHandler} />
     </div>
   );
 }
