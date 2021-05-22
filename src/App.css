@@ -3,6 +3,9 @@
 }
 
 .App > * {
-  border: 1px solid #fff;
   height: 98vh;
+}
+
+.App > *:first-child {
+  border-right: 1px solid #fff;
 }

@@ -3,7 +3,8 @@
   height: 50px;
   border: none;
   color: #fff;
-  border: 1px solid #fff;
+  border: none;
+  border-bottom: 1px solid #fff;
   background-color: #000;
 }
 
