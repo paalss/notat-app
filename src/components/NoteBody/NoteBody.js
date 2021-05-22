@@ -2,7 +2,7 @@ import { useRef } from "react";
 import classes from "./NoteBody.module.css";
 
 const NoteBody = (props) => {
-  console.log("NoteBody RUNNING");
+  // console.log("NoteBody RUNNING");
   const titleRef = useRef();
   const contentRef = useRef();
   const inputChangeHandler = (event) => {

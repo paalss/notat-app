@@ -6,7 +6,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 function App() {
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
-  console.log('notes: ', notes)
+  // console.log('notes: ', notes)
 
   const fetchHttp = async () => {
     const response = await fetch(
@@ -67,10 +67,11 @@ function App() {
         },
       }
     );
-    console.log(data)
-    console.log('hvorfor er ikke "data" ^^ en firebase ID???')
+    const responseObj = await data.json()
+    const id = responseObj.name
+
     setNotes((prevNotes) => {
-      return [...prevNotes, {id: data, title: "", content: ""}];
+      return [...prevNotes, {id: id, title: "", content: ""}];
     });
   };
 
