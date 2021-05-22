@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import NotesContent from "./components/NoteBody/NoteBody";
+import NotesBody from "./components/NoteBody/NoteBody";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {
@@ -55,7 +55,7 @@ function App() {
   return (
     <div className="App">
       <Sidebar onSelectNote={selectNoteHandler} list={notes} />
-      <NotesContent body={selectedNote} />
+      <NotesBody body={selectedNote} />
     </div>
   );
 }
