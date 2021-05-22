@@ -2,7 +2,7 @@ import { useRef } from "react";
 import classes from "./NoteBody.module.css";
 
 const NoteBody = (props) => {
-  console.log("NoteBody RUNNING");
+  // console.log("NoteBody RUNNING");
   const titleRef = useRef();
   const contentRef = useRef();
   const inputChangeHandler = (event) => {
@@ -52,7 +52,7 @@ const NoteBody = (props) => {
       </>
     );
   } else {
-    body = <p>No note selected</p>;
+    body = <p></p>;
   }
   return <div className={classes.root}>{body}</div>;
 };

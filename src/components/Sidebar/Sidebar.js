@@ -3,6 +3,10 @@ import AddNewNoteButton from "./AddNewNoteButton";
 import classes from "./Sidebar.module.css";
 
 const Sidebar = (props) => {
+  const addNoteHandler = () => {
+    props.onAddNote();
+  };
+
   const selectNoteHandler = (id) => {
     props.onSelectNote(id);
   };
@@ -15,10 +19,10 @@ const Sidebar = (props) => {
       </li>
     );
   });
-  
+
   return (
     <div className={classes.root}>
-      <AddNewNoteButton />
+      <AddNewNoteButton onAddNote={addNoteHandler} />
       <ul className={classes["notes-list"]}>{notesList}</ul>
     </div>
   );
