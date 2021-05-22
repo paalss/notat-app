@@ -43,6 +43,7 @@ function App() {
     for (const key in await data) {
       if (selectedNoteId === key) {
         loadedNote.push({
+          id: key,
           title: data[key].title,
           content: data[key].content,
         });

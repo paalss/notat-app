@@ -1,37 +1,36 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import classes from "./NoteBody.module.css";
 
 const NoteBody = (props) => {
   console.log("NoteBody RUNNING");
   const titleRef = useRef();
   const contentRef = useRef();
-  // const title = props.body !== null ? props.body[0].title : "null";
-  // console.log(title);
   const inputChangeHandler = (event) => {
     const changedNote = [
-      { title: titleRef.current.value, content: contentRef.current.value },
+      {
+        id: props.body[0].id,
+        title: titleRef.current.value,
+        content: contentRef.current.value,
+      },
     ];
-    console.log(titleRef.current.value);
-    console.log(contentRef.current.value);
     props.onChangeNote(changedNote);
   };
 
-  // const save = () => {
-  //   fetch(
-  //     "https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes.json",
-  //     {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         title: contentRef.current.value,
-  //         content: "eeeeee!",
-  //       }),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  //   console.log(titleRef.current.value);
-  // };
+  const save = () => {
+    fetch(
+      `https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes/${props.body[0].id}.json`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          title: titleRef.current.value,
+          content: contentRef.current.value,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  };
 
   let body;
   if (props.body !== null) {
@@ -49,7 +48,7 @@ const NoteBody = (props) => {
           value={props.body[0].content}
         ></textarea>{" "}
         <br />
-        {/* <button onClick={save}>Lagre!</button> */}
+        <button onClick={save}>Lagre!</button>
       </>
     );
   } else {
