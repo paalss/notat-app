@@ -9,9 +9,9 @@ function App() {
   // console.log("notes: ", notes);
 
   const fetchHttp = async (noteId) => {
-    const slashId = noteId ? "/" + noteId : "";
+    const slashNoteId = noteId ? "/" + noteId : "";
     const response = await fetch(
-      `https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes${slashId}.json`
+      `https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes${slashNoteId}.json`
     );
     if (!response.ok) {
       throw new Error("Something went wrong!");
@@ -40,7 +40,7 @@ function App() {
 
   const selectNoteHandler = async (selectedNoteId) => {
     const data = await fetchHttp(selectedNoteId);
-    console.log("data: ", await data);
+    // console.log("data: ", await data);
     const loadedNote = [];
     const key = selectedNoteId;
     loadedNote.push({
@@ -92,6 +92,11 @@ function App() {
 
   const changeNoteHandler = (value) => {
     setSelectedNote(value);
+    // setNotes((prevState) => {
+    //   return (prevState = prevState.map(
+    //     (obj) => value.find((o) => o.id === obj.id) || obj
+    //   ));
+    // });
   };
 
   return (

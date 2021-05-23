@@ -46,13 +46,12 @@ const NoteBody = (props) => {
           ref={contentRef}
           onChange={inputChangeHandler}
           value={props.body[0].content}
-        ></textarea>{" "}
-        <br />
-        <button onClick={save}>Lagre!</button>
+        ></textarea>
+        <button onClick={save}>Save</button>
       </>
     );
   } else {
-    body = <p></p>;
+    body = <p>No note selected</p>;
   }
   return <div className={classes.root}>{body}</div>;
 };
