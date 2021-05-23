@@ -6,7 +6,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 function App() {
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
-  // console.log('notes: ', notes)
+  console.log("notes: ", notes);
 
   const fetchHttp = async () => {
     const response = await fetch(
@@ -53,6 +53,22 @@ function App() {
     setSelectedNote(loadedNote);
   };
 
+  const deleteNoteHandler = async (noteId) => {
+    const data = await fetch(
+      `https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes/${noteId}.json`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log('data: ', data)
+    setNotes(prevNotes=>{
+      return prevNotes.filter((x => x.id !== noteId)); 
+    })
+  };
+
   const addNoteHandler = async () => {
     const data = await fetch(
       "https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes.json",
@@ -67,11 +83,11 @@ function App() {
         },
       }
     );
-    const responseObj = await data.json()
-    const id = responseObj.name
+    const responseObj = await data.json();
+    const id = responseObj.name;
 
     setNotes((prevNotes) => {
-      return [...prevNotes, {id: id, title: "", content: ""}];
+      return [...prevNotes, { id: id, title: "", content: "" }];
     });
   };
 
@@ -84,6 +100,7 @@ function App() {
       <Sidebar
         onAddNote={addNoteHandler}
         onSelectNote={selectNoteHandler}
+        onDeleteNote={deleteNoteHandler}
         list={notes}
       />
       <NoteBody body={selectedNote} onChangeNote={changeNoteHandler} />

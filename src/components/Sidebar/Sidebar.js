@@ -11,6 +11,10 @@ const Sidebar = (props) => {
     props.onSelectNote(id);
   };
 
+  const deleteNoteHandler = (id) => {
+    props.onDeleteNote(id);
+  };
+
   const notesList = props.list.map((element) => {
     const title = element.title !== "" ? element.title : "untitled";
     return (
@@ -19,7 +23,9 @@ const Sidebar = (props) => {
           <Button className="w80" onClick={() => selectNoteHandler(element.id)}>
             {title}
           </Button>
-          <Button className="w20">Delete</Button>
+          <Button className="w20" onClick={() => deleteNoteHandler(element.id)}>
+            Delete
+          </Button>
         </div>
       </li>
     );
