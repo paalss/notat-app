@@ -6,11 +6,12 @@ import Sidebar from "./components/Sidebar/Sidebar";
 function App() {
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
-  console.log("notes: ", notes);
+  // console.log("notes: ", notes);
 
-  const fetchHttp = async () => {
+  const fetchHttp = async (noteId) => {
+    const slashId = noteId ? "/" + noteId : "";
     const response = await fetch(
-      "https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes.json"
+      `https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes${slashId}.json`
     );
     if (!response.ok) {
       throw new Error("Something went wrong!");
@@ -38,18 +39,16 @@ function App() {
   }, [fetchNotes]);
 
   const selectNoteHandler = async (selectedNoteId) => {
-    const data = await fetchHttp();
-    // console.log('data: ', await data)
+    const data = await fetchHttp(selectedNoteId);
+    console.log("data: ", await data);
     const loadedNote = [];
-    for (const key in await data) {
-      if (selectedNoteId === key) {
-        loadedNote.push({
-          id: key,
-          title: data[key].title,
-          content: data[key].content,
-        });
-      }
-    }
+    const key = selectedNoteId;
+    loadedNote.push({
+      id: key,
+      title: data.title,
+      content: data.content,
+    });
+
     setSelectedNote(loadedNote);
   };
 
@@ -63,10 +62,10 @@ function App() {
         },
       }
     );
-    console.log('data: ', data)
-    setNotes(prevNotes=>{
-      return prevNotes.filter((x => x.id !== noteId)); 
-    })
+    console.log("data: ", data);
+    setNotes((prevNotes) => {
+      return prevNotes.filter((x) => x.id !== noteId);
+    });
   };
 
   const addNoteHandler = async () => {
