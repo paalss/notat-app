@@ -15,7 +15,12 @@ const Sidebar = (props) => {
     const title = element.title !== "" ? element.title : "untitled";
     return (
       <li key={element.id}>
-        <Button onClick={() => selectNoteHandler(element.id)}>{title}</Button>
+        <div className="flex">
+          <Button className="w80" onClick={() => selectNoteHandler(element.id)}>
+            {title}
+          </Button>
+          <Button className="w20">Delete</Button>
+        </div>
       </li>
     );
   });

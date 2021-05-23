@@ -5,6 +5,6 @@ const AddNewNoteButton = (props) => {
     props.onAddNote();
   };
 
-  return <Button onClick={addNew}>+ Add new note</Button>;
+  return <Button className="w100" onClick={addNew}>+ Add new note</Button>;
 };
 export default AddNewNoteButton;
