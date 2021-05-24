@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import NoteBody from "./components/NoteBody/NoteBody";
+import NoteView from "./components/NoteView/NoteView";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {
@@ -27,7 +27,6 @@ function App() {
       loadedNotes.push({
         id: key,
         title: data[key].title,
-        content: data[key].content,
       });
     }
 
@@ -107,7 +106,7 @@ function App() {
         onDeleteNote={deleteNoteHandler}
         list={notes}
       />
-      <NoteBody body={selectedNote} onChangeNote={changeNoteHandler} />
+      <NoteView body={selectedNote} onChangeNote={changeNoteHandler} />
     </div>
   );
 }

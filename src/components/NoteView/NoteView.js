@@ -1,8 +1,8 @@
 import { useRef } from "react";
-import classes from "./NoteBody.module.css";
+import classes from "./NoteView.module.css";
 
-const NoteBody = (props) => {
-  // console.log("NoteBody RUNNING");
+const NoteView = (props) => {
+  // console.log("NoteView RUNNING");
   const titleRef = useRef();
   const contentRef = useRef();
 
@@ -57,4 +57,4 @@ const NoteBody = (props) => {
   }
   return <div className={classes.root}>{body}</div>;
 };
-export default NoteBody;
+export default NoteView;
