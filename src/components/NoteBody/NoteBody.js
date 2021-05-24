@@ -5,6 +5,7 @@ const NoteBody = (props) => {
   // console.log("NoteBody RUNNING");
   const titleRef = useRef();
   const contentRef = useRef();
+
   const inputChangeHandler = (event) => {
     const changedNote = [
       {
@@ -13,6 +14,7 @@ const NoteBody = (props) => {
         content: contentRef.current.value,
       },
     ];
+    save()
     props.onChangeNote(changedNote);
   };
 
@@ -47,7 +49,7 @@ const NoteBody = (props) => {
           onChange={inputChangeHandler}
           value={props.body[0].content}
         ></textarea>
-        <button onClick={save}>Save</button>
+        {/* <button onClick={save}>Save</button> */}
       </>
     );
   } else {

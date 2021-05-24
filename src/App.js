@@ -92,11 +92,11 @@ function App() {
 
   const changeNoteHandler = (value) => {
     setSelectedNote(value);
-    // setNotes((prevState) => {
-    //   return (prevState = prevState.map(
-    //     (obj) => value.find((o) => o.id === obj.id) || obj
-    //   ));
-    // });
+    setNotes((prevState) => {
+      return (prevState = prevState.map(
+        (obj) => value.find((o) => o.id === obj.id) || obj
+      ));
+    });
   };
 
   return (
