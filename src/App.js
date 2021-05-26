@@ -52,7 +52,8 @@ function App() {
   };
 
   const deleteNoteHandler = async (noteId) => {
-    const data = await fetch(
+    // const data = await
+    fetch(
       `https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes/${noteId}.json`,
       {
         method: "DELETE",
@@ -61,7 +62,7 @@ function App() {
         },
       }
     );
-    console.log("data: ", data);
+    // console.log("data: ", data);
     setNotes((prevNotes) => {
       return prevNotes.filter((x) => x.id !== noteId);
     });
