@@ -8,6 +8,18 @@ body {
   display: flex;
 }
 
+button {
+  color: #fff;
+}
+
+.green {
+  color: #bdffd1
+}
+
+.red {
+  color: #ffbdbd;
+}
+
 .w100 {
   width: 100%;
 }

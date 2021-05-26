@@ -23,7 +23,7 @@ const Sidebar = (props) => {
           <Button className="w80" onClick={() => selectNoteHandler(element.id)}>
             {title}
           </Button>
-          <Button className="w20" onClick={() => deleteNoteHandler(element.id)}>
+          <Button className="w20 red" onClick={() => deleteNoteHandler(element.id)}>
             Delete
           </Button>
         </div>
