@@ -1,8 +1,8 @@
 .button {
+  width: 100%;
   padding: 0;
   height: 50px;
-  border: none;
-  /* color: #fff; */
+  color: #fff;
   border: none;
   border-bottom: 1px solid #fff;
   background-color: #000;
@@ -11,4 +11,20 @@
 .button:hover {
   cursor: pointer;
   background-color: #353535;
+}
+
+.green {
+  color: #bdffd1;
+}
+
+.red {
+  color: #ffbdbd;
+}
+
+.w80 {
+  width: 80%;
+}
+
+.w20 {
+  width: 20%;
 }

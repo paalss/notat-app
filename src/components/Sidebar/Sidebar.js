@@ -20,10 +20,10 @@ const Sidebar = (props) => {
     return (
       <li key={element.id}>
         <div className="flex">
-          <Button className="w80" onClick={() => selectNoteHandler(element.id)}>
+          <Button width="80%" onClick={() => selectNoteHandler(element.id)}>
             {title}
           </Button>
-          <Button className="w20 red" onClick={() => deleteNoteHandler(element.id)}>
+          <Button color="red" width="20%" onClick={() => deleteNoteHandler(element.id)}>
             Delete
           </Button>
         </div>

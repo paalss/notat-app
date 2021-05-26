@@ -7,27 +7,3 @@ body {
 .flex {
   display: flex;
 }
-
-button {
-  color: #fff;
-}
-
-.green {
-  color: #bdffd1
-}
-
-.red {
-  color: #ffbdbd;
-}
-
-.w100 {
-  width: 100%;
-}
-
-.w80 {
-  width: 80%;
-}
-
-.w20 {
-  width: 20%;
-}
