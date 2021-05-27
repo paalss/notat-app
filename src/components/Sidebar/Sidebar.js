@@ -2,21 +2,21 @@ import Button from "../UI/Button";
 import AddNewNoteButton from "./AddNewNoteButton";
 import classes from "./Sidebar.module.css";
 
-const Sidebar = (props) => {
+const Sidebar = ({ onAddNote, onSelectNote, onDeleteNote, list }) => {
   const addNoteHandler = () => {
-    props.onAddNote();
+    onAddNote();
   };
 
   const selectNoteHandler = (id) => {
-    props.onSelectNote(id);
+    onSelectNote(id);
   };
 
   const deleteNoteHandler = (id) => {
-    props.onDeleteNote(id);
+    onDeleteNote(id);
   };
 
   // Definer note listen
-  const noteList = props.list.map((element) => {
+  const noteList = list.map((element) => {
     const title = element.title !== "" ? element.title : "untitled";
     return (
       <li key={element.id}>
@@ -24,7 +24,11 @@ const Sidebar = (props) => {
           <Button width="80%" onClick={() => selectNoteHandler(element.id)}>
             {title}
           </Button>
-          <Button width="20%" color="red" onClick={() => deleteNoteHandler(element.id)}>
+          <Button
+            width="20%"
+            color="red"
+            onClick={() => deleteNoteHandler(element.id)}
+          >
             Delete
           </Button>
         </div>

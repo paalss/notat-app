@@ -1,9 +1,9 @@
 import classes from "./Button.module.css";
 
-const Button = (props) => {
+const Button = ({ color, width, onClick, className, styles, children }) => {
   // Mulige konfigurasjoner for komponentet
   let btnColor;
-  switch (props.color) {
+  switch (color) {
     case "green":
       btnColor = classes.green;
       break;
@@ -17,7 +17,7 @@ const Button = (props) => {
   }
 
   let btnWidth;
-  switch (props.width) {
+  switch (width) {
     case "80%":
       btnWidth = classes.w80;
       break;
@@ -31,13 +31,13 @@ const Button = (props) => {
   }
   return (
     <button
-      onClick={props.onClick}
+      onClick={onClick}
       className={
-        btnColor + " " + btnWidth + " " + props.className + " " + classes.button
+        btnColor + " " + btnWidth + " " + className + " " + classes.button
       }
-      styles={props.styles}
+      styles={styles}
     >
-      {props.children}
+      {children}
     </button>
   );
 };
