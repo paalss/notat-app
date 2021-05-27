@@ -1,6 +1,7 @@
 import classes from "./Button.module.css";
 
 const Button = (props) => {
+  // Mulige konfigurasjoner for komponentet
   let btnColor;
   switch (props.color) {
     case "green":

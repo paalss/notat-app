@@ -4,10 +4,10 @@ import NoteView from "./components/NoteView/NoteView";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {
-  const [notes, setNotes] = useState([]);
+  const [noteList, setNoteList] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
-  // console.log("notes: ", notes);
 
+  // Hent alle notes, eller én note hvis noteId parameter er gitt
   const fetchHttp = async (noteId) => {
     const slashNoteId = noteId ? "/" + noteId : "";
     const response = await fetch(
@@ -19,6 +19,7 @@ function App() {
     return await response.json();
   };
 
+  // Hent note-data for å vise note-listen i sidebar
   const fetchNotes = useCallback(async () => {
     const data = await fetchHttp();
 
@@ -30,16 +31,17 @@ function App() {
       });
     }
 
-    setNotes(loadedNotes);
+    setNoteList(loadedNotes);
   }, []);
 
   useEffect(() => {
     fetchNotes();
   }, [fetchNotes]);
 
-  const selectNoteHandler = async (selectedNoteId) => {
+  // Hent note-data for å vise note i note view
+  const fetchSelectedNote = async (selectedNoteId) => {
     const data = await fetchHttp(selectedNoteId);
-    // console.log("data: ", await data);
+
     const loadedNote = [];
     const key = selectedNoteId;
     loadedNote.push({
@@ -51,8 +53,8 @@ function App() {
     setSelectedNote(loadedNote);
   };
 
+  // Slett note fra firebase og oppdater GUI
   const deleteNoteHandler = async (noteId) => {
-    // const data = await
     fetch(
       `https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes/${noteId}.json`,
       {
@@ -62,12 +64,12 @@ function App() {
         },
       }
     );
-    // console.log("data: ", data);
-    setNotes((prevNotes) => {
+    setNoteList((prevNotes) => {
       return prevNotes.filter((x) => x.id !== noteId);
     });
   };
 
+  // Legg til note i firebase og oppdater GUI
   const addNoteHandler = async () => {
     const data = await fetch(
       "https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes.json",
@@ -85,27 +87,45 @@ function App() {
     const responseObj = await data.json();
     const id = responseObj.name;
 
-    setNotes((prevNotes) => {
+    setNoteList((prevNotes) => {
       return [...prevNotes, { id: id, title: "", content: "" }];
     });
   };
 
+  // Lagre note i firebase, gjør input mutable og oppdater note-list GUI
   const changeNoteHandler = (value) => {
+    save(value);
     setSelectedNote(value);
-    setNotes((prevState) => {
+    setNoteList((prevState) => {
       return (prevState = prevState.map(
         (obj) => value.find((o) => o.id === obj.id) || obj
       ));
     });
   };
 
+  const save = (value) => {
+    fetch(
+      `https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes/${value[0].id}.json`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          title: value[0].title,
+          content: value[0].content,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  };
+
   return (
     <div className="App">
       <Sidebar
         onAddNote={addNoteHandler}
-        onSelectNote={selectNoteHandler}
+        onSelectNote={fetchSelectedNote}
         onDeleteNote={deleteNoteHandler}
-        list={notes}
+        list={noteList}
       />
       <NoteView body={selectedNote} onChangeNote={changeNoteHandler} />
     </div>

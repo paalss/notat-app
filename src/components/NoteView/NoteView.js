@@ -2,10 +2,10 @@ import { useRef } from "react";
 import classes from "./NoteView.module.css";
 
 const NoteView = (props) => {
-  // console.log("NoteView RUNNING");
   const titleRef = useRef();
   const contentRef = useRef();
 
+  // Ved skriving i note, lagre og oppdater App
   const inputChangeHandler = (event) => {
     const changedNote = [
       {
@@ -14,26 +14,10 @@ const NoteView = (props) => {
         content: contentRef.current.value,
       },
     ];
-    save()
     props.onChangeNote(changedNote);
   };
 
-  const save = () => {
-    fetch(
-      `https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/notes/${props.body[0].id}.json`,
-      {
-        method: "PUT",
-        body: JSON.stringify({
-          title: titleRef.current.value,
-          content: contentRef.current.value,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-  };
-
+  // Vis note tekst dersom en note er valgt
   let body;
   if (props.body !== null) {
     body = (
@@ -49,7 +33,6 @@ const NoteView = (props) => {
           onChange={inputChangeHandler}
           value={props.body[0].content}
         ></textarea>
-        {/* <button onClick={save}>Save</button> */}
       </>
     );
   } else {

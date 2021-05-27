@@ -1,5 +1,6 @@
 import Button from "../UI/Button";
 
+// '+ Add new note'-knappen
 const AddNewNoteButton = (props) => {
   const addNew = () => {
     props.onAddNote();

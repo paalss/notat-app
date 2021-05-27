@@ -15,7 +15,8 @@ const Sidebar = (props) => {
     props.onDeleteNote(id);
   };
 
-  const notesList = props.list.map((element) => {
+  // Definer note listen
+  const noteList = props.list.map((element) => {
     const title = element.title !== "" ? element.title : "untitled";
     return (
       <li key={element.id}>
@@ -23,7 +24,7 @@ const Sidebar = (props) => {
           <Button width="80%" onClick={() => selectNoteHandler(element.id)}>
             {title}
           </Button>
-          <Button color="red" width="20%" onClick={() => deleteNoteHandler(element.id)}>
+          <Button width="20%" color="red" onClick={() => deleteNoteHandler(element.id)}>
             Delete
           </Button>
         </div>
@@ -31,10 +32,11 @@ const Sidebar = (props) => {
     );
   });
 
+  // Print ut sidebar innhold, inkludert note listen
   return (
     <div className={classes.root}>
       <AddNewNoteButton onAddNote={addNoteHandler} />
-      <ul className={classes["notes-list"]}>{notesList}</ul>
+      <ul className={classes["notes-list"]}>{noteList}</ul>
     </div>
   );
 };
